@@ -21,7 +21,7 @@
             <li v-for="item in sortItems" >{{item}}</li>
         </ul>
          <ul>
-            <li v-for="student in students" >
+            <li v-for="student in sortStudents" >
                 {{student.name}}--{{student.age}}
                 </li>
         </ul>
@@ -41,13 +41,25 @@
                // 排序 需要重新声明 否则会污染数据源 vue 不允许
               sortItems:function(){
                   return this.items.sort(sortNumber);
+              },
+              sortStudents:function(){
+                 return sortByKey(this.students,'age')
               }
            }
        })
 
-       // 自定义函数 进行排序
+       // 自定义函数 进行排序 正序
        function sortNumber(a,b){
             return a-b;
+       }
+
+       function sortByKey(arr,key){
+         return arr.sort(function(a,b){
+                var x = a[key];
+                var y = b[key];
+                console.log(x,y)
+                return ((x < y)?-1:((x > y)?1:0));
+         })
        }
     </script>
 </body>
