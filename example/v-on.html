@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../assets/image/logo.png" type="image/x-icon">
+    <script src="../assets/js/vue.min.js">
+        
+    </script>
+    <title>v-on</title>
+</head>
+<body>
+    <h1>v-on事件监听</h1>
+    <hr>
+    <div id="app">
+        <!--
+            v-on  @ 绑定事件
+            v-model 双向数据绑定
+        -->
+       比赛得分:{{count}} <br>
+       <button v-on:click="puls">加分</button>
+       <button @click="sub">减分</button> 
+       <br>
+       <input type="text" v-model="secondCount" @keyup.enter='onEnter'>
+       
+    </div>
+    <script type="text/javascript">
+       var app = new Vue({
+           el : "#app",
+           data : {
+              count:0,
+              secondCount:''
+           },
+           methods:{
+                puls(){
+                    this.count++;
+                },
+                sub(){
+                    this.count--;
+                },
+                onEnter(){
+                    this.count =this.count + parseInt(this.secondCount);
+                    this.secondCount = ''
+                }
+           }
+
+       })
+    </script>
+</body>
+</html>
