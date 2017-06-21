@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../assets/image/logo.png" type="image/x-icon">
+    <script src="../assets/js/vue.min.js"></script>
+    <style>
+     .classA{
+         color: red
+     }
+     .classB{
+         font-size: 18px
+     }
+    </style>
+    <title>v-bind</title>
+</head>
+<body>
+    <h1>v-bind 处理html 属性</h1>
+    <hr>
+    <div id="app">
+        <!--完整写法-->
+       <img v-bind:src="imgSrc" >
+       <!--简写-->
+       <img :src="imgSrc" >
+       <a :href="url" target="_blank">百度</a>
+       <hr>
+       <!--绑定class-->
+       <div :class='className'>直接绑定class</div>
+       <div :class='{classA:isA}'>判断绑定class</div>
+       <input type="checkbox" name="" value="isA" v-model="isA">
+       <div  :class="[classA,classB]"> class 数组绑定</div>
+       <div  :class="isA?classA:classB"> class 数组绑定</div>
+       <hr>
+       <!--
+           {color:red,fontSize:font} 使用，分隔
+       -->
+       <div :style='{color:red,fontSize:font}'>style绑定</div>
+       <div :style='objStyle'>对象style绑定</div>
+
+    </div>
+    <script type="text/javascript">
+       var app = new Vue({
+           el : "#app",
+           data : {
+              imgSrc:'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png',
+              url:'http://www.baidu.com',
+              className:'classA',
+              isA:true,
+              classA:'classA',
+              classB:'classB',
+              red:'yellow',
+              font:'18px',
+            //   使用 fontSize 小驼峰
+              objStyle:{
+                  color:'green',
+                  fontSize:'18px'
+              }
+           }
+       })
+    </script>
+</body>
+</html>
