@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../assets/image/logo.png" type="image/x-icon">
+    <script src="../assets/js/vue.min.js">
+        
+    </script>
+    <title>vue.extends 扩展实例构造器 </title>
+</head>
+<body>
+    <h1>vue.extends 扩展实例构造器 </h1>
+    <hr>
+    <!-- 全局 可用-->
+    <author></author>
+    <script type="text/javascript">
+       // 自定义 扩展 
+       var authorExtend =Vue.extend({
+            template:"<a :href='authorUrl'>{{authorName}}</a>",
+            data:function(){
+                return {
+                    authorName:'百度',
+                    authorUrl:'https://www.baidu.com/'
+                }
+            }
+       }
+
+       )
+
+    // 加载 扩展
+    new authorExtend().$mount('author');
+    </script>
+</body>
+</html>
