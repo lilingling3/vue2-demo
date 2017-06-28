@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../assets/image/logo.png" type="image/x-icon">
+    <script src="../assets/js/vue.min.js">
+        
+    </script>
+    <title>mixins 混入选项</title>
+</head>
+<body>
+    <h1>mixins 混入选项</h1>
+    <hr>
+    <div id="app">
+        {{num}} <br>
+        <button @click='add()'>add</button>
+    </div>
+    <script type="text/javascript">
+    // 额外增加 控制台输出
+    // 全局 混入 先执行  然后 是 局部混入 然后 是 原生updated后执行
+       var addLog = {
+           updated:function(){
+               console.log('数据发生变化'+this.num)
+           }
+
+       }
+        Vue.mixin({
+           updated:function(){
+               console.log('我是全局的 混入')
+           }
+       })
+       var app = new Vue({
+           el : "#app",
+           data : {
+              num:1
+           },
+           methods:{
+               add:function(){
+                   this.num++
+               }
+           },
+           updated:function(){
+                console.log('我是原生的')
+           },
+           // 不改变 原有 的构造器 添加新功能
+           mixins:[addLog]
+       })
+
+      
+    </script>
+</body>
+</html>

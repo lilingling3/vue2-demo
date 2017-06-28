@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../assets/image/logo.png" type="image/x-icon">
+    <script src="../assets/js/vue.min.js">
+        
+    </script>
+    <title>mixins 混入选项</title>
+</head>
+<body>
+    <h1>mixins 混入选项</h1>
+    <hr>
+    <div id="app">
+        {{num}} <br>
+        ${num}
+        <button @click='add()'>add</button>
+    </div>
+    <script type="text/javascript">
+       var　extendObj = {
+           updated:function(){
+               console.log('扩展的 updated')
+           },
+           methods:{
+               // 同名 执行 原生
+               add:function(){
+                  console.log('我是扩展的方法add')
+                //   this.num++
+               }
+           }
+       }
+       var app = new Vue({
+           el : "#app",
+           data : {
+              num:1
+           },
+           methods:{
+               add:function(){
+                  console.log('原生的 add')
+                  this.num++
+               }
+           },
+           updated:function(){
+                console.log('我是原生的updated')
+           },
+           extends:extendObj,
+           delimiters:['${','}'] // 改变插值方式
+
+         
+       })
+
+      
+    </script>
+</body>
+</html>
