@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../assets/image/logo.png" type="image/x-icon">
+    <script src="../assets/js/vue.min.js"> </script>
+    <script src="../assets/js/jquery.min.js"></script>
+    <title>example methods Demo 事件</title>
+</head>
+<body>
+    <h1>example methods Demo 事件</h1>
+    <hr>
+    <div id="app">
+        {{num}} <br>
+        <button @click='add()'>add</button>
+    </div>
+    <button onClick='reduce()'>reduce</button>
+    <button onClick='reduceOnce()'>reduceOnce</button>
+    <button onClick='off()'>关闭reduce</button>
+
+    <script type="text/javascript">
+      var app =  new Vue({
+           el:'#app',
+           data:{
+               num :1
+           },
+           methods:{
+               add:function(){
+                   this.num++
+               }
+           }
+       })
+       // $on  $emit 外部调用内部事件 可以执行多次
+       app.$on('reduce',function(){
+           console.log('reduce 执行了')
+           this.num--
+       })
+      
+      function reduce(){
+          app.$emit('reduce')
+      }
+
+      app.$once('reduceOnce',function(){
+           console.log('reduce 只执行一次')
+           this.num--
+       })
+      
+      function reduceOnce(){
+          app.$emit('reduceOnce')
+      }
+      
+      function off(){
+          app.$off('reduce')
+      }
+
+    </script>
+</body>
+</html>

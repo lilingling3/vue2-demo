@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../assets/image/logo.png" type="image/x-icon">
+    <script src="../assets/js/vue.min.js"> </script>
+    <script src="../assets/js/jquery.min.js"></script>
+    <title>example methods Demo slot 内置组件</title>
+</head>
+<body>
+    <h1>example methods Demo slot 内置组件</h1>
+    <hr>
+    <div id="app">
+        <!--
+            组件名字 不能 是testSlot 大写
+        -->
+        <testslot>
+            <!--
+                第一步： slot 传递值 key:beolgUrl  value:jspangData.bolgUrl
+            -->
+            <span slot="bolgUrl">{{jspangData.bolgUrl}}</span>
+            <span slot="netName">{{jspangData.netName}}</span>
+            <span slot="skill">{{jspangData.skill}}</span>
+        </testSlot>
+    </div>
+    <!-- template 模板-->
+    <template id="tmp">
+        <!-- 模板必须 套一个div-->
+        <div>
+            <!--
+                slot 成对 接收值
+            -->
+            <p>博客地址：<slot name='bolgUrl'></slot></p>
+            <p>网名：<slot name='netName'></slot></p>
+            <p>技术类型：<slot name='skill'></slot></p>
+        </div>
+    </template>
+    
+    <script type="text/javascript">
+    //   组件模板 
+      var testSlot = {
+          template:'#tmp'
+      }
+      
+      var app =  new Vue({
+           el:'#app',
+           data:{
+               jspangData:{
+                   bolgUrl:'http://jspang.com',
+                   netName:'技术胖',
+                   skill:'Web前端'
+               }
+           },
+           components:{
+               'testslot':testSlot
+           }
+           
+       })
+     
+
+    </script>
+</body>
+</html>

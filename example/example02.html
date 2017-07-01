@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../assets/image/logo.png" type="image/x-icon">
+    <script src="../assets/js/vue.min.js"> </script>
+    <script src="../assets/js/jquery.min.js"></script>
+    <title>example methods Demo</title>
+</head>
+<body>
+    <h1>example methods Demo $mount</h1>
+    <hr>
+    <div id="app"></div>
+    <button onclick="destroy()">销毁</button>
+    <button onclick="updated()">刷新</button>
+    <button onclick="trick()">更改数据</button>
+
+    <script type="text/javascript">
+        
+        var testMethod = Vue.extend({
+            template:`<p>{{message}}</p>`,
+            data:function(){
+                return {
+                    message:'hello vue'
+                    }
+            },
+            mounted:function(){
+                console.log('mouted 被创建')
+            },
+            destroyed:function(){
+                console.log('vm destroyed')
+            },
+            updated:function(){
+                console.log('vm updated')
+            }
+        })
+        //$mounte() 挂载
+        var vm  = new testMethod().$mount('#app')
+
+       function destroy(){
+            vm.$destroy();
+        }
+
+        function updated(){
+            vm.$forceUpdate()
+        }
+
+        function trick(){
+            vm.message = 'hello vue 更改了';
+            vm.$nextTick(function(){
+                console.log('vue 数据更改了')
+            })
+
+        }
+  
+    </script>
+</body>
+</html>
